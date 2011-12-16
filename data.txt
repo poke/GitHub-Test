@@ -1,1 +1,4 @@
 Foo.
+Bar.
+Foobar.
+Barbaz.
