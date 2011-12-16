@@ -7,6 +7,7 @@ github_path = 'git@github.com:poke/GitHub-Test.git'
 parser = argparse.ArgumentParser( description='Sample gh-pages build tool', epilog=None )
 parser.add_argument( '--init', '-i', action='store_true', help='initialize gh-pages subdirectory' )
 parser.add_argument( '--commit', '-c', action='store_true', help='commit' )
+parser.add_argument( '--publish', '-p', action='store_true', help='publish/push' )
 
 args = parser.parse_args()
 
@@ -20,8 +21,14 @@ if args.init:
 if args.commit:
 	originalDir = os.getcwd()
 	os.chdir( 'bin/' )
-	os.system( 'dir' )
 	os.system( 'git commit -am "Update, {}"'.format( datetime.utcnow().isoformat( ' ' ) ) )
+	os.chdir( originalDir )
+	parser.exit()
+
+if args.publish:
+	originalDir = os.getcwd()
+	os.chdir( 'bin/' )
+	os.system( 'git push' )
 	os.chdir( originalDir )
 	parser.exit()
 
